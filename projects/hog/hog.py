@@ -22,6 +22,17 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    i, sum = 0, 0
+    flag_1 = False 
+    while i < num_rolls:
+        outcome = dice()
+        if outcome == 1: #  if any of the outcomes is 1, make flag_1 True
+            flag_1 = True
+        sum += outcome
+        i += 1
+    if flag_1:
+        return 1
+    return sum # forget to return result again !!!!
     # END PROBLEM 1
 
 
@@ -30,9 +41,12 @@ def free_bacon(score):
 
     score:  The opponent's current score.
     """
+    assert type(score) == int and score >= 0, 'score must be a integer >= 0.'
     assert score < 100, 'The game should be over.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    digit1, digit2 = score % 10, (score // 10) % 10
+    return 2 + abs(digit1 - digit2)
     # END PROBLEM 2
 
 
@@ -51,13 +65,26 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if num_rolls == 0:
+        return free_bacon(opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
 def is_swap(score0, score1):
-    """Return whether one of the scores is an integer multiple of the other."""
+    """Return whether one of the scores is an integer multiple of the other.
+
+    score0: score of Player 0
+    score1: score of Player 1
+    """
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    assert type(score0) == int, 'score0 must be a integer.'
+    assert type(score1) == int, 'score1 must be a integer.'
+    assert score0 >= 0 and score1 >=0, 'score0 and score1 can not be negative.'
+    return score0 > 1 and score1 > 1 and \
+           (score0 % score1 == 0 or score1 % score0 == 0)
     # END PROBLEM 4
 
 
@@ -97,6 +124,20 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    
+    while score0 < goal and score1 < goal:
+        if player == 0:
+            num_rolls = strategy0(score0, score1) # get num_rolls by strategy0
+            score0 += take_turn(num_rolls, score1, dice) # add score of current turn
+        else:
+            num_rolls = strategy1(score1, score0)
+            score1 += take_turn(num_rolls, score0, dice)
+        
+        if is_swap(score0, score1):
+            score0, score1 = score1, score0
+
+        player = other(player)
+
     # END PROBLEM 5
     return score0, score1
 

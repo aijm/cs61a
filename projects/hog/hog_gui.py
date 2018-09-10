@@ -315,6 +315,7 @@ class HogGUI(Frame):
         except HogGUIException:
             pass
         else:
+            # print('final score:', score, opponent_score)
             self.s_labels[0].text = score
             self.s_labels[1].text = opponent_score
             winner = 0 if score > opponent_score else 1
