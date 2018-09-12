@@ -15,6 +15,11 @@ def if_this_not_that(i_list, this):
     5
     """
     "*** YOUR CODE HERE ***"
+    for x in i_list:
+        if x > this:
+            print(x)
+        else:
+            print('that')
 
 # City ADT
 def make_city(name, lat, lon):
@@ -67,6 +72,10 @@ def distance(city1, city2):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    return sqrt((get_lat(city1) - get_lat(city2)) ** 2 +
+                (get_lon(city1) - get_lon(city2)) ** 2)
+
+
 
 # Q5
 def closer_city(lat, lon, city1, city2):
@@ -84,13 +93,17 @@ def closer_city(lat, lon, city1, city2):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    city_none = make_city('none', lat, lon)
+    distance1 = distance(city_none, city1)
+    distance2 = distance(city_none, city2)
+    return get_name(city1) if distance1 < distance2 else get_name(city2)
 
 # Q6
 # This is another implementation of the City ADT. Make sure
 # your code works for both the previous and the following versions
 # of the constructor and selectors!
 #
-# make_city = lambda name, lat, lon: [lon, [lat], name]
-# get_name = lambda city: city[2]
-# get_lat = lambda city: city[1][0]
-# get_lon = lambda city: city[0]
+make_city = lambda name, lat, lon: [lon, [lat], name]
+get_name = lambda city: city[2]
+get_lat = lambda city: city[1][0]
+get_lon = lambda city: city[0]

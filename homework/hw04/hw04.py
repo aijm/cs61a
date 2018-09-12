@@ -27,6 +27,7 @@ def taxicab(a, b):
     9
     """
     "*** YOUR CODE HERE ***"
+    return abs(street(a) - street(b)) + abs(avenue(a) - avenue(b))
 
 def squares(s):
     """Returns a new list containing square roots of the elements of the
@@ -40,6 +41,7 @@ def squares(s):
     []
     """
     "*** YOUR CODE HERE ***"
+    return [int(x ** 0.5) for x in s if int(x ** 0.5) ** 2 == x]
 
 def g(n):
     """Return the value of G(n), computed recursively.
@@ -59,6 +61,11 @@ def g(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    assert type(n) == int and n > 0, 'n must be a positive integer.'
+    if n <= 3:
+        return n
+    else:
+        return g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3)
 
 def g_iter(n):
     """Return the value of G(n), computed iteratively.
@@ -78,6 +85,12 @@ def g_iter(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    g, g1, g2 = 1, 2, 3 # using g, g1, g2 to save values
+    i = 1
+    while i < n:
+        g, g1, g2 = g1, g2, g2 + 2 * g1 + 3 * g
+        i += 1
+    return g
 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
@@ -111,6 +124,17 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    # flag = 1
+    # i, value = 1, 0
+    # while i <= n:
+    #     value = value + flag
+    #     if i % 7 == 0 or has_seven(i):
+    #         flag = -flag
+    #     i = i + 1
+    # return value
+    # to be continue...
+    
+        
 
 def has_seven(k):
     """Returns True if at least one of the digits of k is a 7, False otherwise.
@@ -148,6 +172,15 @@ def count_change(amount):
     9828
     """
     "*** YOUR CODE HERE ***"
+    return count_change_rec(amount, 1)
+
+def count_change_rec(amount, mincoin): # mincoin means using mincoin, 2*mincoin, 4*mincoin...
+    if amount < mincoin:
+        return 0
+    elif amount == mincoin:
+        return 1
+    else:
+        return count_change_rec(amount, 2 * mincoin) + count_change_rec(amount - mincoin, mincoin)
 
 ###################
 # Extra Questions #
@@ -164,4 +197,5 @@ def make_anonymous_factorial():
     >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return "it's too hard!!!"
+    
