@@ -144,5 +144,8 @@ def adjoin(s, v):
         return BTree(s.label, s.left, adjoin(s.right, v))
     else:
         return BTree(s.label, adjoin(s.left, v), s.right)
-    
-        
+
+
+
+
+
