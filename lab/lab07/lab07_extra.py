@@ -18,6 +18,17 @@ def remove_all(link , value):
     <0 1>
     """
     "*** YOUR CODE HERE ***"
+    head = link
+    while head.rest is not Link.empty:
+        while head.rest.first != value:
+            head = head.rest
+            if head.rest is Link.empty:
+                break
+        if head.rest:
+            head.rest = head.rest.rest
+
+
+    
 
 # Q7
 def deep_map_mut(fn, link):
@@ -33,6 +44,13 @@ def deep_map_mut(fn, link):
     <9 <16> 25 36>
     """
     "*** YOUR CODE HERE ***"
+    head = link
+    while head is not Link.empty:
+        if isinstance(head.first, Link):
+            deep_map_mut(fn, head.first)
+        else:
+            head.first = fn(head.first)
+        head = head.rest
 
 # Q8
 def has_cycle(link):
@@ -50,6 +68,16 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    visited = set()
+    head = link
+    while head is not Link.empty:
+        if head in visited:
+            return True
+        else:
+            visited.add(head)
+            head = head.rest
+    return False
+
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
@@ -63,6 +91,15 @@ def has_cycle_constant(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    head = link
+    while head is not Link.empty:
+        if hasattr(head, "visited"):
+            return True
+        else:
+            head.visited = True
+            head = head.rest
+    return False
+
 
 # Q9
 def reverse_other(t):

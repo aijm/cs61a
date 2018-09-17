@@ -36,6 +36,12 @@ class Fib():
 
     def next(self):
         "*** YOUR CODE HERE ***"
+        if not hasattr(self, 'previous'):
+            self.previous = 1
+        next_fib = Fib(self.value + self.previous)
+        next_fib.previous = self.value
+        return next_fib
+        
 
     def __repr__(self):
         return str(self.value)
@@ -78,3 +84,37 @@ class VendingMachine:
     'Here is your soda.'
     """
     "*** YOUR CODE HERE ***"
+    def __init__(self, product, price):
+        self.product = product
+        self.price = price
+        self.balance = 0
+        self.stock = 0
+
+    def vend(self):
+        if self.stock == 0:
+            return 'Machine is out of stock.'
+        elif self.balance < self.price:
+            return 'You must deposit ${} more.'.format(self.price - self.balance)
+        elif self.balance == self.price:
+            self.stock -= 1
+            self.balance = 0
+            return 'Here is your {}.'.format(self.product)
+        else:
+            self.stock -= 1
+            change = self.balance - self.price
+            self.balance = 0
+            return 'Here is your {} and ${} change.'.format(self.product, change)
+
+
+    def deposit(self, amount):
+        if self.stock:
+            self.balance = self.balance + amount
+            return 'Current balance: ${}'.format(self.balance)
+        else:
+            return 'Machine is out of stock. Here is your ${}.'.format(amount)
+
+    def restock(self, amount):
+        self.stock += amount
+        return 'Current {} stock: {}'.format(self.product, self.stock)
+
+    

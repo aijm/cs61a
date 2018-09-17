@@ -61,6 +61,7 @@ def digits(n):
     s = Link.empty
     while n > 0:
         n, last = n // 10, n % 10
+        s = Link(last, s)
         "*** YOUR CODE HERE ***"
     return s
 
@@ -168,4 +169,12 @@ class MissManners:
         magic_word = 'please '
         if not message.startswith(magic_word):
             return 'You must learn to say please first.'
+        elif hasattr(self.obj, message[7:]):
+            action = getattr(self.obj, message[7:])
+            return action(*args)
+        else:
+            template = 'Thanks for asking, but I know not how to {}.'
+            return template.format(message[7:])
         "*** YOUR CODE HERE ***"
+
+
