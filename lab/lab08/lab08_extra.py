@@ -248,7 +248,6 @@ def long_paths(tree, n):
         branch_paths = [long_paths(b, n - 1) for b in tree.branches]
         paths = sum(branch_paths, [])
         paths = [Link(tree.label, path) for path in paths]
-        return paths
 
 
 # Orders of Growth
