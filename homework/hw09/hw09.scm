@@ -1,5 +1,8 @@
 (define (how-many-dots s)
-  'YOUR-CODE-HERE
+  (cond ((or (null? s) (number? s)) 0)
+        ((pair? (cdr s)) (+ (how-many-dots (car s)) (how-many-dots (cdr s))))
+        ((null? (cdr s)) (how-many-dots (car s)))
+        (else (+ (how-many-dots (car s)) 1)))
 )
 
 (define (cadr s) (car (cdr s)))
@@ -48,7 +51,7 @@
 (define (multiplicand p) (caddr p))
 
 (define (derive-sum expr var)
-  'YOUR-CODE-HERE
+  
 )
 
 (define (derive-product expr var)

@@ -2,7 +2,10 @@
 
 ; Q2
 (define (over-or-under x y)
-  'YOUR-CODE-HERE
+  (cond ((< x y) -1)
+        ((= x y)  0)
+        (else     1) 
+    )
 )
 
 ;;; Tests
@@ -15,7 +18,10 @@
 
 ; Q3
 (define (filter f lst)
-  'YOUR-CODE-HERE
+  (cond ((null? lst) lst)
+        ((f (car lst)) (cons (car lst) (filter f (cdr lst))))
+        (else (filter f (cdr lst)))
+    )
 )
 
 ;;; Tests
@@ -26,7 +32,10 @@
 
 ; Q4
 (define (make-adder num)
-  'YOUR-CODE-HERE
+  (define (adder x)
+    (+ num x)
+  )
+  adder ; return function adder
 )
 
 ;;; Tests

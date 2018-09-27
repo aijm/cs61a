@@ -7,14 +7,11 @@ test = {
         {
           'code': r"""
           scm> (make-sum 1 3)
-          afe11f721da99d6cc29c38c6c9f996cb
-          # locked
+          4
           scm> (make-sum 'x 0)
-          b07308dadf589c670387415df24205dc
-          # locked
+          x
           scm> (make-sum 0 'x)
-          b07308dadf589c670387415df24205dc
-          # locked
+          x
           scm> (make-sum 'a 'x)
           572a031a195b58555c6c8306c459f8ab
           # locked
