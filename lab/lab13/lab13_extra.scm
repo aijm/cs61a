@@ -1,6 +1,14 @@
 ; Q4
 (define (rle s)
-  'YOUR-CODE-HERE
+  (cond ((null? s) nil)
+        ((null? (cdr-stream s)) (cons-stream (cons-stream (car s) (cons-stream 1 nil)) nil))
+        ((eq? (car s) (car (cdr-stream s)))
+          (define rle-cdr (rle (cdr-stream s)))
+          (cons-stream (cons-stream (car s) (cons-stream (+ (cdr (car rle-cdr)) 1) nil)) (cdr-stream rle-cdr)))
+        (else 
+          (define rle-cdr (rle (cdr-stream s)))
+          (cons-stream (cons-stream (car s) (cons-stream 1 nil)) rle-cdr))
+  )
 )
 
 ; Q4 testing functions

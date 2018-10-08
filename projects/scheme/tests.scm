@@ -10,7 +10,8 @@
 ;;; *** Add your own tests here! ***
 ;;; ********************************
 ; BEGIN PROBLEM 0
-'replace-this-line
+((lambda (x y) (* x y)) 2 3)
+; expect 6
 ; END PROBLEM 0
 
 ;;; These are examples from several sections of "The Structure

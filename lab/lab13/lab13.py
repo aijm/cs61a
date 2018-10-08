@@ -20,3 +20,9 @@ def permutations(lst):
         yield []
         return
     "*** YOUR CODE HERE ***"
+    lst = list(lst)
+    for x in lst:
+        left = lst.copy()
+        left.remove(x)
+        for left_permu in permutations(left):
+            yield [x] + left_permu
